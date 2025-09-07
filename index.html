@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Destroyer Bot</title>
+  <style>
+    body { font-family: Arial; background: #121212; color: white; text-align: center; padding: 50px; }
+    button { padding: 15px 30px; margin: 10px; font-size: 18px; border-radius: 10px; border: none; cursor: pointer; }
+    .login { background: #ff4444; color: white; }
+    .action { background: #00c851; color: white; }
+  </style>
+</head>
+<body>
+  <h1>🔥 Destroyer Bot 🔥</h1>
+  <p>Login and start trading on Deriv (Real Account)</p>
+
+  <button class="login" onclick="window.location.href=backend+'/login'">Login with Deriv</button>
+  <br>
+  <button class="action" onclick="checkBalance()">Check Balance</button>
+  <button class="action" onclick="runTrade()">Run Test Trade</button>
+
+  <p id="output"></p>
+
+  <script>
+    const backend = "http://localhost:8000"; // change to backend URL later
+
+    async function checkBalance() {
+      let res = await fetch(backend+"/balance");
+      let data = await res.json();
+      document.getElementById("output").innerText = "Balance: " + JSON.stringify(data);
+    }
+
+    async function runTrade() {
+      let res = await fetch(backend+"/trade");
+      let data = await res.json();
+      document.getElementById("output").innerText = "Trade: " + JSON.stringify(data);
+    }
+  </script>
+</body>
+</html>
